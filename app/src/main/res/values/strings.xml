@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">TrabajoFinal</string>
+    <string name="app_name">Trabajo Final</string>
+    <string name="botonListar">Listar</string>
+    <string name="botonAgregar">Agregar</string>
 </resources>
