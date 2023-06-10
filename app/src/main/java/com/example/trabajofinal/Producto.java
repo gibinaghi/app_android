@@ -75,4 +75,9 @@ public class Producto {
     public void setStock(int stock) {
         Stock = stock;
     }
+
+    @Override
+    public String toString() {
+        return  "Nombre='" + Nombre + "'";
+    }
 }

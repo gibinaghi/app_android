@@ -22,6 +22,12 @@ public class CRUDProductos extends ListActivity {
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         List<Producto> productos=productoDataSource.obtenerTodos();
         ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
         setListAdapter(adapter);
@@ -30,5 +36,12 @@ public class CRUDProductos extends ListActivity {
     public void Agregar(View v){
         Intent i=new Intent(this,ProductoAltaModificacion.class);
         startActivity(i);
+    }
+
+    public void Listar(View v){
+        List<Producto> productos=productoDataSource.obtenerTodos();
+        ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
+        setListAdapter(adapter);
+
     }
 }

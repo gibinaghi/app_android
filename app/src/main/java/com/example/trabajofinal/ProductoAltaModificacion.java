@@ -3,8 +3,10 @@ package com.example.trabajofinal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ProductoAltaModificacion extends AppCompatActivity {
 
@@ -37,7 +39,9 @@ public class ProductoAltaModificacion extends AppCompatActivity {
         prodNuevo.setPrecio(Double.parseDouble(txtPrecio.getText().toString()));
         prodNuevo.setStock(Integer.parseInt(txtStock.getText().toString()));
         prodNuevo.setStockMinimo(Integer.parseInt(txtStockMinimo.getText().toString()));
-
+        Toast.makeText(this,prodNuevo.toString(), Toast.LENGTH_LONG).show();
+        Log.w("aa",prodNuevo.toString());
         productoDataSource.agregar(prodNuevo);
+
     }
 }
