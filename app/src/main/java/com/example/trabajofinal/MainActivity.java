@@ -15,41 +15,29 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String VIDEO = "mivideo";
+    private static final String VIDEO = "https://winaysa.com/coke/mivideo.mp4";
     private VideoView videoView;
     private int posicion = 0;
     private static final String PLAYBACK_TIME = "play_time";
-    /*
 
+    private TextView tvBuffering;
 
-
-    private TextView mBufferingTextView;
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         videoView = findViewById(R.id.videoview);
+        tvBuffering = findViewById(R.id.buffering_textview);
 
         if (savedInstanceState != null) {
             posicion = savedInstanceState.getInt(PLAYBACK_TIME);
         }
 
-
         MediaController controlador = new MediaController(this);
         controlador.setMediaPlayer(videoView);
 
         videoView.setMediaController(controlador);
-  /*
-
-
-
-
-
-
-        mBufferingTextView = findViewById(R.id.buffering_textview);
-        */
     }
 
     public void onClick(View v){
@@ -60,17 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
     // Video
     private Uri getMedia(String mediaName) {
-        //if (URLUtil.isValidUrl(mediaName)) {
-            // media name is an external URL
-        //    return Uri.parse(mediaName);
-      //  } else {
-            // media name is a raw resource embedded in the app
+        if (URLUtil.isValidUrl(mediaName)) {
+            return Uri.parse(mediaName);
+        } else {
             return Uri.parse("android.resource://" + getPackageName() + "/raw/" + mediaName);
-      //  }
+        }
     }
 
     private void initializePlayer() {
-       // mBufferingTextView.setVisibility(VideoView.VISIBLE);
+       tvBuffering.setVisibility(VideoView.VISIBLE);
 
         Uri videoUri = getMedia(VIDEO);
         videoView.setVideoURI(videoUri);
@@ -85,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         videoView.setOnPreparedListener( new MediaPlayer.OnPreparedListener() {
             @Override public void onPrepared(MediaPlayer mediaPlayer) {
-                //mBufferingTextView.setVisibility(VideoView.INVISIBLE);
+                tvBuffering.setVisibility(VideoView.INVISIBLE);
                 if (posicion > 0) {
                     videoView.seekTo(posicion);
                 } else {
