@@ -2,4 +2,6 @@
     <string name="app_name">Trabajo Final</string>
     <string name="botonListar">Listar</string>
     <string name="botonAgregar">Agregar</string>
+    <string name="Titulo">TiendaExpress</string>
+    <string name="Bufeering">Buffering...</string>
 </resources>

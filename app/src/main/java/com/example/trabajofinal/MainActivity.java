@@ -15,29 +15,41 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String VIDEO_SAMPLE = "mivideo.mp4";
-    private VideoView mVideoView;
-    private int mCurrentPosition = 0;
+    private static final String VIDEO = "mivideo";
+    private VideoView videoView;
+    private int posicion = 0;
     private static final String PLAYBACK_TIME = "play_time";
-    private TextView mBufferingTextView;
+    /*
 
+
+
+    private TextView mBufferingTextView;
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Video
-        mVideoView = findViewById(R.id.videoview);
+        videoView = findViewById(R.id.videoview);
 
         if (savedInstanceState != null) {
-            mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
+            posicion = savedInstanceState.getInt(PLAYBACK_TIME);
         }
 
+
         MediaController controlador = new MediaController(this);
-        controlador.setMediaPlayer(mVideoView);
-        mVideoView.setMediaController(controlador);
+        controlador.setMediaPlayer(videoView);
+
+        videoView.setMediaController(controlador);
+  /*
+
+
+
+
+
 
         mBufferingTextView = findViewById(R.id.buffering_textview);
+        */
     }
 
     public void onClick(View v){
@@ -48,67 +60,73 @@ public class MainActivity extends AppCompatActivity {
 
     // Video
     private Uri getMedia(String mediaName) {
-        if (URLUtil.isValidUrl(mediaName)) {
+        //if (URLUtil.isValidUrl(mediaName)) {
             // media name is an external URL
-            return Uri.parse(mediaName);
-        } else {
+        //    return Uri.parse(mediaName);
+      //  } else {
             // media name is a raw resource embedded in the app
             return Uri.parse("android.resource://" + getPackageName() + "/raw/" + mediaName);
-        }
+      //  }
     }
 
     private void initializePlayer() {
-        mBufferingTextView.setVisibility(VideoView.VISIBLE);
+       // mBufferingTextView.setVisibility(VideoView.VISIBLE);
 
-        Uri videoUri = getMedia(VIDEO_SAMPLE);
-        mVideoView.setVideoURI(videoUri);
+        Uri videoUri = getMedia(VIDEO);
+        videoView.setVideoURI(videoUri);
 
-        if (mCurrentPosition > 0) {
-            mVideoView.seekTo(mCurrentPosition);
+        if (posicion > 0) {
+            videoView.seekTo(posicion);
         } else {
             // Saltar a 1 muestra el primer cuadro del video.
-            mVideoView.seekTo(1);
+            videoView.seekTo(1);
         }
-        mVideoView.start();
+        videoView.start();
 
-        mVideoView.setOnPreparedListener( new MediaPlayer.OnPreparedListener() {
+        videoView.setOnPreparedListener( new MediaPlayer.OnPreparedListener() {
             @Override public void onPrepared(MediaPlayer mediaPlayer) {
-                mBufferingTextView.setVisibility(VideoView.INVISIBLE);
-                if (mCurrentPosition > 0) {
-                    mVideoView.seekTo(mCurrentPosition);
+                //mBufferingTextView.setVisibility(VideoView.INVISIBLE);
+                if (posicion > 0) {
+                    videoView.seekTo(posicion);
                 } else {
-                    mVideoView.seekTo(1);
+                    videoView.seekTo(1);
                 }
-                mVideoView.start();
+                videoView.start();
             }
         });
 
-        mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override public void onCompletion(MediaPlayer mediaPlayer) {
-                Toast.makeText(MainActivity.this, "Playback completed",
-                        Toast.LENGTH_SHORT).show();
-                mVideoView.seekTo(1);
+                //Toast.makeText(MainActivity.this, "Playback completed", Toast.LENGTH_SHORT).show();
+                videoView.seekTo(1);
             }
         });
     }
 
-    private void releasePlayer() { mVideoView.stopPlayback(); }
+    private void releasePlayer() {
+        videoView.stopPlayback();
+    }
 
     @Override
-    protected void onStart() { super.onStart(); initializePlayer(); }
+    protected void onStart() {
+        super.onStart();
+        initializePlayer();
+    }
 
     @Override
-    protected void onStop() { super.onStop(); releasePlayer(); }
+    protected void onStop() {
+        super.onStop();
+        releasePlayer();
+    }
 
     @Override protected void onPause() {
         super.onPause();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            mVideoView.pause();
+            videoView.pause();
         }
     }
-
     @Override protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(PLAYBACK_TIME, mVideoView.getCurrentPosition());
+        outState.putInt(PLAYBACK_TIME, videoView.getCurrentPosition());
     }
 }
