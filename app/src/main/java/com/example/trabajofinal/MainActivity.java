@@ -59,7 +59,16 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_login){
+     //Realizar acción
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public void onClick(View v){
         Intent i=new Intent(this, CRUDProductos.class);
         startActivity(i);
