@@ -1,5 +1,6 @@
 package com.example.trabajofinal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -8,6 +9,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.MediaController;
@@ -50,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         videoView.setMediaController(controlador);
     }
 
+    //Crea el menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    
     public void onClick(View v){
         Intent i=new Intent(this, CRUDProductos.class);
         startActivity(i);
