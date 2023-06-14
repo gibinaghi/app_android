@@ -1,6 +1,7 @@
 package com.example.trabajofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -22,10 +23,19 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvBuffering;
 
+
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //ToolBar
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.Titulo);
+
 
         videoView = findViewById(R.id.videoview);
         tvBuffering = findViewById(R.id.buffering_textview);
@@ -85,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override public void onCompletion(MediaPlayer mediaPlayer) {
                 //Toast.makeText(MainActivity.this, "Playback completed", Toast.LENGTH_SHORT).show();
                 videoView.seekTo(1);
+                initializePlayer();
             }
         });
     }
