@@ -80,15 +80,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_login){
             loginWithBrowser();
+        }else if(item.getItemId()==R.id.item_logout){
+            logout();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void onClick(View v){
-        Intent i=new Intent(this, CRUDProductos.class);
-        startActivity(i);
-
     }
 
     // Video
@@ -162,8 +157,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(PLAYBACK_TIME, videoView.getCurrentPosition());
     }
 
-    //public void loginWithBrowser(View v){
-        public void loginWithBrowser(){
+    public void loginWithBrowser(){
         Callback<Credentials, AuthenticationException> callback = new Callback<Credentials, AuthenticationException>() {
             @Override
             public void onFailure(@NonNull AuthenticationException exception) {
@@ -173,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(@Nullable Credentials credentials) {
                 //succeeded!
-               Intent i=new Intent(MainActivity.this, CRUDProductos.class);
-               startActivity(i);
+                Intent i=new Intent(MainActivity.this, CRUDProductos.class);
+                startActivity(i);
             }
         };
         WebAuthProvider.login(account)
