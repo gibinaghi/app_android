@@ -1,6 +1,7 @@
 package com.example.trabajofinal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,7 +19,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.auth0.android.Auth0;
+import com.auth0.android.authentication.AuthenticationAPIClient;
+import com.auth0.android.authentication.AuthenticationException;
+import com.auth0.android.callback.Callback;
+import com.auth0.android.provider.WebAuthProvider;
+import com.auth0.android.result.Credentials;
+
 public class MainActivity extends AppCompatActivity {
+
+    private Auth0 account;
+    private AuthenticationAPIClient client;
+
     private static final String VIDEO = "https://winaysa.com/coke/mivideo.mp4";
     private VideoView videoView;
     private int posicion = 0;
@@ -32,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        account=new Auth0(getString(R.string.com_auth0_client_id),getString(R.string.com_auth0_domain));
+
+
 
         //ToolBar
         toolbar = findViewById(R.id.toolbar);
@@ -63,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_login){
-     //Realizar acción
+            loginWithBrowser();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -144,5 +160,45 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(PLAYBACK_TIME, videoView.getCurrentPosition());
+    }
+
+    //public void loginWithBrowser(View v){
+        public void loginWithBrowser(){
+        Callback<Credentials, AuthenticationException> callback = new Callback<Credentials, AuthenticationException>() {
+            @Override
+            public void onFailure(@NonNull AuthenticationException exception) {
+                //failed with an exception
+            }
+
+            @Override
+            public void onSuccess(@Nullable Credentials credentials) {
+                //succeeded!
+               Intent i=new Intent(MainActivity.this, CRUDProductos.class);
+               startActivity(i);
+            }
+        };
+        WebAuthProvider.login(account)
+                .withScheme(getString(R.string.com_auth0_schema))
+                .start(this, callback);
+    }
+
+    //public void logout(View v){
+    public void logout(){
+        Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {
+            @Override
+            public void onFailure(@NonNull AuthenticationException e) {
+
+            }
+
+            @Override
+            public void onSuccess(@Nullable Void payload) {
+                Toast.makeText(MainActivity.this, "CHAU", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        //Configure and launch the log out
+        WebAuthProvider.logout(account)
+                .withScheme(getString(R.string.com_auth0_schema))
+                .start(MainActivity.this, logoutCallback);
     }
 }
