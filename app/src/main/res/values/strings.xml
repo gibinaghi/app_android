@@ -8,4 +8,7 @@
     <string name="com_auth0_client_id">rB51ov3tEfqNdSSgjgiWbahyuTvjFfop</string>
     <string name="com_auth0_domain">dev-gd2cd3u4stlwlvkb.us.auth0.com</string>
     <string name="com_auth0_schema">tf</string>
+    <string name="nombre">Nombre</string>
+    <string name="descripcion">Descripción</string>
+    <string name="talle">Talle</string>
 </resources>

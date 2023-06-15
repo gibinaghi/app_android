@@ -39,8 +39,8 @@ public class ProductoAltaModificacion extends AppCompatActivity {
         prodNuevo.setPrecio(Double.parseDouble(txtPrecio.getText().toString()));
         prodNuevo.setStock(Integer.parseInt(txtStock.getText().toString()));
         prodNuevo.setStockMinimo(Integer.parseInt(txtStockMinimo.getText().toString()));
-        Toast.makeText(this,prodNuevo.toString(), Toast.LENGTH_LONG).show();
-        Log.w("aa",prodNuevo.toString());
+       // Toast.makeText(this,prodNuevo.toString(), Toast.LENGTH_LONG).show();
+        //Log.w("aa",prodNuevo.toString());
         productoDataSource.agregar(prodNuevo);
 
     }

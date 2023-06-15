@@ -63,9 +63,10 @@ public class ProductoDataSource {
             p.setId(cursor.getInt(0));
             p.setNombre(cursor.getString(1));
             p.setDescripcion(cursor.getString(2));
-            p.setPrecio(cursor.getDouble(3));
-            p.setStock(cursor.getInt(4));
-            p.setStockMinimo(cursor.getInt(5));
+            p.setTalle(cursor.getString(3));
+            p.setPrecio(cursor.getDouble(4));
+            p.setStock(cursor.getInt(5));
+            p.setStockMinimo(cursor.getInt(6));
             productos.add(p);
             cursor.moveToNext();
         }

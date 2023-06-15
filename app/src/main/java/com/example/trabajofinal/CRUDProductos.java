@@ -30,6 +30,8 @@ public class CRUDProductos extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ListView lv;
+
+    MyAdaptadorProductos adaptador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,35 +46,34 @@ public class CRUDProductos extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.Titulo);
 
-
-
         account=new Auth0(getString(R.string.com_auth0_client_id),getString(R.string.com_auth0_domain));
 
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
-
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        List<Producto> productos=productoDataSource.obtenerTodos();
-        ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
+        //List<Producto> productos=productoDataSource.obtenerTodos();
+        //ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
         //lv.setListAdapter(adapter);
-        lv.setAdapter(adapter);
+        //lv.setAdapter(adapter);
+        Listar();
     }
 
-    public void Agregar(View v){
+    public void Agregar(){
         Intent i=new Intent(this,ProductoAltaModificacion.class);
         startActivity(i);
     }
 
-    public void Listar(View v){
+    public void Listar(){
         List<Producto> productos=productoDataSource.obtenerTodos();
-        ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
+        //ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
         //setListAdapter(adapter);
-        lv.setAdapter(adapter);
+        adaptador=new MyAdaptadorProductos(this,productos);
+        lv.setAdapter(adaptador);
     }
 
 
@@ -85,8 +86,11 @@ public class CRUDProductos extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_login){
+
         }else if(item.getItemId()==R.id.item_logout){
             logout();
+        }else if(item.getItemId()==R.id.item_agregar){
+            Agregar();
         }
         return super.onOptionsItemSelected(item);
     }
