@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -50,6 +51,14 @@ public class CRUDProductos extends AppCompatActivity {
 
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Producto p=(Producto) lv.getItemAtPosition(position);
+                
+            }
+        });
 
     }
 
@@ -94,6 +103,9 @@ public class CRUDProductos extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {

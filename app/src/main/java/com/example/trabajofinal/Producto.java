@@ -78,6 +78,6 @@ public class Producto {
 
     @Override
     public String toString() {
-        return  "Nombre='" + Nombre + "'";
+        return  "Nombre='" + Nombre + "' Id="+ Id;
     }
 }
