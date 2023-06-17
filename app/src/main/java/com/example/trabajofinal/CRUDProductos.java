@@ -104,9 +104,7 @@ public class CRUDProductos extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
+    //Logout
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {
             @Override

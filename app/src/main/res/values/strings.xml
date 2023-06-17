@@ -11,4 +11,12 @@
     <string name="nombre">Nombre</string>
     <string name="descripcion">Descripción</string>
     <string name="talle">Talle</string>
+    <string name="nosotros">Nosotros</string>
+    <string name="login">Login</string>
+    <string name="text_descripcion">Somos Jorge, Gime y Diego, alumnos de la Tecnicatura Superior en Desarrollo Web y Aplicaciones Móviles, y decidimos crear TiendaExpress para poder brindarte una experiencia única y satisfactoria al momento de comprar ropa en Cordoba Capital, sin importar tu talla o forma corporal. En ella nos especializamos en proporcionar información detallada y actualizada sobre las mejores tiendas de ropa que ofrecen tallas especiales y podras realizar la compra sin moverte de tu casa. ¿En que nos diferenciamos? No solo recopilamos información sobre las mejores tiendas, precios y marcas que ofrecen tallas especiales, sino que también te proporcionamos reseñas honestas, recomendaciones de estilismo y consejos prácticos. Queremos que te sientas comodo/a y seguro/a al momento de elegir tu ropa, y creemos que la información es la clave para lograrlo. Explora nuestra aplicacion 100% intuitiva, para descubrir una amplia gama de tiendas de renombre en nuestra ciudad, que se especializan en tallas especiales. Te ofrecemos detalles sobre sus colecciones, opciones de tallas, políticas de devolución y mucha más informacion que te ayudara a realizar tu mejor compra. Además, mantenemos nuestra plataforma actualizada regularmente para asegurarnos de que siempre tengas acceso a la información más reciente y relevante. En TiendaExpress valoramos la diversidad y la inclusión, siempre en busqueda de fomentar la aceptación de todas las formas y tallas corporales, promoviendo una mentalidad positiva y saludable dentro de la industria de la moda.</string>
+    <string name="footer">¡Explora, elegi y sentite espectacular con tu compra gracias a TiendaExpress!</string>
+    <string name="logout">Logout</string>
+    <string name="agregar_productos">Agregar Productos</string>
+    <string name="modificar_productos">Modificar Productos</string>
+    <string name="eliminar_productos">Eliminar Productos</string>
 </resources>

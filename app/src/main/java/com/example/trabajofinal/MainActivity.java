@@ -29,7 +29,6 @@ import com.auth0.android.result.Credentials;
 public class MainActivity extends AppCompatActivity {
 
     private Auth0 account;
-    private AuthenticationAPIClient client;
 
     private static final String VIDEO = "https://winaysa.com/coke/mivideo.mp4";
     private VideoView videoView;
@@ -80,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_login){
             loginWithBrowser();
-        }else if(item.getItemId()==R.id.item_logout){
-            logout();
+        }else if(item.getItemId()==R.id.item_nosotros){
+            llamarNosotros();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Video
+    //Video
     private Uri getMedia(String mediaName) {
         if (URLUtil.isValidUrl(mediaName)) {
             return Uri.parse(mediaName);
@@ -157,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(PLAYBACK_TIME, videoView.getCurrentPosition());
     }
 
+    //Login
     public void loginWithBrowser(){
         Callback<Credentials, AuthenticationException> callback = new Callback<Credentials, AuthenticationException>() {
             @Override
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 .start(this, callback);
     }
 
-    //public void logout(View v){
+    //Logout
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {
             @Override
@@ -194,5 +194,11 @@ public class MainActivity extends AppCompatActivity {
         WebAuthProvider.logout(account)
                 .withScheme(getString(R.string.com_auth0_schema))
                 .start(MainActivity.this, logoutCallback);
+    }
+
+    //Nosotros
+    public void llamarNosotros(){
+        Intent i = new Intent(this, NosotrosActivity.class);
+        startActivity(i);
     }
 }
