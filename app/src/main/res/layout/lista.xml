@@ -35,4 +35,27 @@
         android:text="@string/talle"
         />
 
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:height="3dp"
+        android:text="Eliminar"
+        android:textSize="8sp" />
+
+    <Button
+        android:id="@+id/btnModificar"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_below="@+id/btnEliminar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="-2dp"
+        android:height="3dp"
+        android:text="Modificar"
+        android:textSize="8sp" />
+
+
 </RelativeLayout>
