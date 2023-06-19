@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         account=new Auth0(getString(R.string.com_auth0_client_id),getString(R.string.com_auth0_domain));
 
-
-
         //ToolBar
         toolbar = findViewById(R.id.toolbar);
 
@@ -67,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         controlador.setMediaPlayer(videoView);
 
         videoView.setMediaController(controlador);
-
-
     }
 
     //Crea el menu
@@ -148,14 +144,13 @@ public class MainActivity extends AppCompatActivity {
         releasePlayer();
     }
 
-
-
     @Override protected void onPause() {
         super.onPause();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             videoView.pause();
         }
     }
+
     @Override protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(PLAYBACK_TIME, videoView.getCurrentPosition());

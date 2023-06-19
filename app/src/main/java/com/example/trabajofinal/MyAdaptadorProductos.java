@@ -47,22 +47,19 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
         TextView descripcion = (TextView) convertView.findViewById(R.id.tvDescripcion);
         TextView talle = (TextView) convertView.findViewById(R.id.tvtalle);
 
-
         // Lead actual.
         Producto p = getItem(position);
 
         // Setup.
         nombre.setText("Nombre: " + p.getNombre());
-        descripcion.setText("Descripción:" +p.getDescripcion());
-        talle.setText("Talle: " +p.getTalle());
+        descripcion.setText("Descripción: " +p.getDescripcion());
+        talle.setText("Talle: " +(!p.getTalle().equals("") ? p.getTalle() : "S/T"));
 
         productoDataSource=new ProductoDataSource(getContext());
         productoDataSource.open();
 
         Button botonEliminar=convertView.findViewById(R.id.btnEliminar);
         Button botonModificar=convertView.findViewById(R.id.btnModificar);
-
-        //ListView lvListar=convertView.findViewById(R.id.listView);
 
         botonEliminar.setOnClickListener(new View.OnClickListener() {
             @Override

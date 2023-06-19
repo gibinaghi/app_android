@@ -45,7 +45,6 @@ public class MenuActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.item_login){
@@ -56,7 +55,6 @@ public class MenuActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //public void loginWithBrowser(View v){
     public void loginWithBrowser(){
         Callback<Credentials, AuthenticationException> callback = new Callback<Credentials, AuthenticationException>() {
             @Override
@@ -76,7 +74,6 @@ public class MenuActivity extends AppCompatActivity {
                 .start(this, callback);
     }
 
-    //public void logout(View v){
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {
             @Override

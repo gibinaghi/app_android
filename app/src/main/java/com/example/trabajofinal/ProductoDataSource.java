@@ -37,13 +37,14 @@ public class ProductoDataSource {
         contentValues.put(SqlHelper.TP_STOCKMINIMO, pProducto.getStockMinimo());
         contentValues.put(SqlHelper.TP_STOCK, pProducto.getStock());
 
-        Long Id=database.insert(SqlHelper.TABLAPRODUCTOS,null,contentValues);
-
+        database.insert(SqlHelper.TABLAPRODUCTOS,null,contentValues);
     }
+
     public void borrar(Producto p){
         long id=p.getId();
         database.delete(SqlHelper.TABLAPRODUCTOS,SqlHelper.TP_ID+"="+id,null);
     }
+
     public List<Producto> obtenerTodos(){
         List<Producto> productos=new ArrayList<Producto>();
         Cursor cursor=database.query(SqlHelper.TABLAPRODUCTOS,ColumnasSelectObtenerTodos,null,null,null,null,SqlHelper.TP_NOMBRE);
@@ -63,6 +64,7 @@ public class ProductoDataSource {
         cursor.close();
         return productos;
     }
+
     public List<Producto> obtenerProductosStockMinimo(){
         List<Producto> productos=new ArrayList<Producto>();
         Cursor cursor=database.query(SqlHelper.TABLAPRODUCTOS,ColumnasSelectObtenerTodos,SqlHelper.TP_STOCKMINIMO+">"+SqlHelper.TP_STOCK,null,null,null,SqlHelper.TP_NOMBRE);
@@ -83,7 +85,6 @@ public class ProductoDataSource {
         return productos;
     }
 
-
     public void modificacion(Producto pProducto){
         ContentValues contentValues=new ContentValues();
         contentValues.put(SqlHelper.TP_NOMBRE, pProducto.getNombre());
@@ -93,7 +94,6 @@ public class ProductoDataSource {
         contentValues.put(SqlHelper.TP_STOCKMINIMO, pProducto.getStockMinimo());
         contentValues.put(SqlHelper.TP_STOCK, pProducto.getStock());
 
-        int Id=database.update(SqlHelper.TABLAPRODUCTOS,contentValues,SqlHelper.TP_ID+"="+pProducto.getId(),null);
-
+        database.update(SqlHelper.TABLAPRODUCTOS,contentValues,SqlHelper.TP_ID+"="+pProducto.getId(),null);
     }
 }

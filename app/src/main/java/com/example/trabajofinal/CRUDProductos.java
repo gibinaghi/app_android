@@ -54,9 +54,6 @@ public class CRUDProductos extends AppCompatActivity {
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
         noexiste=findViewById(R.id.noexiste);
-
-        // GONE = INVISIBLE SIN OCUPAR ESPACIO
-      //  noexiste.setVisibility(View.GONE);
     }
 
     @Override
@@ -78,12 +75,9 @@ public class CRUDProductos extends AppCompatActivity {
         lv.setAdapter(adaptador);
 
         if (productos.size() == 0) {
-    //        noexiste.setVisibility(View.VISIBLE);
             noexiste.setText(R.string.noexistencia);
         } else {
-          //  noexiste.setVisibility(View.GONE);
             noexiste.setText(R.string.lista_de_productos);
-
         }
       }
 
@@ -110,6 +104,7 @@ public class CRUDProductos extends AppCompatActivity {
         Intent i=new Intent(this, ProductoStockMinimoActivity.class);
         startActivity(i);
     }
+
     //Logout
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {

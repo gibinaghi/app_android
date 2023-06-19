@@ -51,8 +51,7 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
         productoDataSource.open();
         noexiste=findViewById(R.id.noexiste);
 
-        // GONE = INVISIBLE SIN OCUPAR ESPACIO
-       // noexiste.setVisibility(View.GONE);
+        // Flecha volver atrás
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
     }
@@ -76,15 +75,11 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
         lv.setAdapter(adaptador);
 
         if (productos.size() == 0) {
-            //        noexiste.setVisibility(View.VISIBLE);
             noexiste.setText(R.string.noexistencia);
         } else {
-            //  noexiste.setVisibility(View.GONE);
             noexiste.setText(R.string.lista_de_productos_faltantes);
-
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,6 +100,7 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void ListarProductoStockMinimo(){
         Intent i=new Intent(this, ProductoStockMinimoActivity.class);
         startActivity(i);
@@ -130,6 +126,4 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
                 .withScheme(getString(R.string.com_auth0_schema))
                 .start(ProductoStockMinimoActivity.this, logoutCallback);
     }
-
-
 }

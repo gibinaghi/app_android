@@ -46,19 +46,17 @@ public class MyAdaptadorProductoMinimo extends ArrayAdapter<Producto> {
         TextView descripcion = (TextView) convertView.findViewById(R.id.tvDescripcion);
         TextView detalle = (TextView) convertView.findViewById(R.id.tvdetalle);
 
-
         // Lead actual.
         Producto p = getItem(position);
 
         // Setup.
         nombre.setText("Nombre: " + p.getNombre());
-        descripcion.setText("Descripción:" +p.getDescripcion());
-        detalle.setText("Talle: " +p.getTalle()+" Stock minimo:" + p.getStockMinimo() + " Stock: " + p.getStock());
+        descripcion.setText("Descripción: " +p.getDescripcion());
+        detalle.setText("Talle: " +(!p.getTalle().equals("") ? p.getTalle() : "S/T")+" - Stock minimo: " + p.getStockMinimo() + " - Stock: " + p.getStock());
 
         productoDataSource=new ProductoDataSource(getContext());
         productoDataSource.open();
 
         return convertView;
     }
-
 }
