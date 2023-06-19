@@ -74,6 +74,11 @@ public class ProductoAltaModificacion extends AppCompatActivity {
         }
     }
 
+    public void Modificar(View v){
+        Toast.makeText(this, "aca llego", Toast.LENGTH_LONG).show();
+        //aca obtener datos del producto
+    }
+
     //Logout
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {

@@ -58,6 +58,7 @@
         android:layout_marginEnd="2dp"
         android:height="3dp"
         android:backgroundTint="#36933A"
+        android:onClick="Modificar"
         android:text="@string/modificar"
         android:textSize="8sp" />
 
@@ -65,7 +66,8 @@
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="58dp"
-        app:srcCompat="@android:drawable/btn_star" />
+        android:src="@drawable/producto"
+        />
 
 
 </RelativeLayout>

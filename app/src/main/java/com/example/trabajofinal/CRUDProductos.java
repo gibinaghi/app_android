@@ -41,7 +41,9 @@ public class CRUDProductos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crudproductos);
+
         lv=findViewById(R.id.listView);
+
         //ToolBar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,6 +54,7 @@ public class CRUDProductos extends AppCompatActivity {
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
         noexiste=findViewById(R.id.noexiste);
+
         // GONE = INVISIBLE SIN OCUPAR ESPACIO
         noexiste.setVisibility(View.GONE);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,10 +70,6 @@ public class CRUDProductos extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //List<Producto> productos=productoDataSource.obtenerTodos();
-        //ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
-        //lv.setListAdapter(adapter);
-        //lv.setAdapter(adapter);
         Listar();
     }
 
@@ -81,15 +80,14 @@ public class CRUDProductos extends AppCompatActivity {
 
     public void Listar() {
         List<Producto> productos = productoDataSource.obtenerTodos();
-        //ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
-        //setListAdapter(adapter);
+
         adaptador = new MyAdaptadorProductos(this, productos);
         adaptador.setNoexiste(noexiste);
         lv.setAdapter(adaptador);
+
         if (productos.size() == 0) {
-               noexiste.setVisibility(View.VISIBLE);
-             }
-        else {
+            noexiste.setVisibility(View.VISIBLE);
+        } else {
             noexiste.setVisibility(View.GONE);
         }
       }

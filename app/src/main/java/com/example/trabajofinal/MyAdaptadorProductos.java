@@ -1,12 +1,12 @@
 package com.example.trabajofinal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +42,6 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
         }
 
         // Referencias UI.
-        //ImageView avatar = (ImageView) convertView.findViewById(R.id.ivImagen);
         TextView nombre = (TextView) convertView.findViewById(R.id.tvNombre);
         TextView descripcion = (TextView) convertView.findViewById(R.id.tvDescripcion);
         TextView talle = (TextView) convertView.findViewById(R.id.tvtalle);
@@ -52,15 +51,18 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
         Producto p = getItem(position);
 
         // Setup.
-        //Glide.with(getContext()).load(em.getImagen()).into(avatar);
-        //   avatar.setImageBitmap();
         nombre.setText("Nombre: " + p.getNombre());
         descripcion.setText("Descripción:" +p.getDescripcion());
         talle.setText("Talle: " +p.getTalle());
+
         productoDataSource=new ProductoDataSource(getContext());
         productoDataSource.open();
+
         Button botonEliminar=convertView.findViewById(R.id.btnEliminar);
-        ListView lvListar=convertView.findViewById(R.id.listView);
+        Button botonModificar=convertView.findViewById(R.id.btnModificar);
+
+        //ListView lvListar=convertView.findViewById(R.id.listView);
+
         botonEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,8 +70,15 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
                 Toast.makeText(getContext(), "El producto " + p.getNombre() + " se ha eliminado exitosamente", Toast.LENGTH_LONG).show();
                 Borrar(p);
             }
-
         });
+
+        botonModificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Modificar(p);
+            }
+        });
+
         return convertView;
     }
 
@@ -77,11 +86,13 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
         this.remove(producto);
         if(this.getCount() == 0){
              noexiste.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
              noexiste.setVisibility(View.GONE);
-             }
-
-
+        }
      }
+
+    public void Modificar(Producto producto) {
+        Intent intent = new Intent(getContext(), ProductoAltaModificacion.class);
+        getContext().startActivity(intent);
+    }
 }
