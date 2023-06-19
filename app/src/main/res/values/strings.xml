@@ -22,4 +22,5 @@
     <string name="eliminar">Eliminar</string>
     <string name="modificar">Modificar</string>
     <string name="noexistencia">No existen Productos a mostrar</string>
+    <string name="productos_faltantes">Productos Faltantes</string>
 </resources>

@@ -15,17 +15,22 @@
         android:theme="@style/Theme.TrabajoFinal"
         tools:targetApi="31">
         <activity
+            android:name=".ProductoStockMinimoActivity"
+            android:exported="false" />
+        <activity
             android:name=".NosotrosActivity"
             android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value= ".MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".ProductoAltaModificacion"
             android:exported="false"
             android:parentActivityName=".CRUDProductos">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value= ".CRUDProductos" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CRUDProductos" />
         </activity>
         <activity
             android:name=".CRUDProductos"

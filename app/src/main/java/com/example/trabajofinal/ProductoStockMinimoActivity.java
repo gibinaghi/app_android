@@ -5,17 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.auth0.android.Auth0;
 import com.auth0.android.authentication.AuthenticationException;
@@ -24,8 +20,7 @@ import com.auth0.android.provider.WebAuthProvider;
 
 import java.util.List;
 
-public class CRUDProductos extends AppCompatActivity {
-
+public class ProductoStockMinimoActivity extends AppCompatActivity {
     ProductoDataSource productoDataSource;
 
     private Auth0 account;
@@ -40,7 +35,7 @@ public class CRUDProductos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crudproductos);
+        setContentView(R.layout.activity_producto_stock_minimo);
 
         lv=findViewById(R.id.listView);
 
@@ -82,7 +77,7 @@ public class CRUDProductos extends AppCompatActivity {
         } else {
             noexiste.setVisibility(View.GONE);
         }
-      }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,6 +87,7 @@ public class CRUDProductos extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if(item.getItemId()==R.id.item_logout){
             logout();
         }else if(item.getItemId()==R.id.item_agregar){
@@ -110,7 +106,7 @@ public class CRUDProductos extends AppCompatActivity {
 
             @Override
             public void onSuccess(@Nullable Void payload) {
-                Intent i=new Intent(CRUDProductos.this,MainActivity.class);
+                Intent i=new Intent(ProductoStockMinimoActivity.this,MainActivity.class);
                 startActivity(i);
             }
         };
@@ -118,6 +114,6 @@ public class CRUDProductos extends AppCompatActivity {
         //Configure and launch the log out
         WebAuthProvider.logout(account)
                 .withScheme(getString(R.string.com_auth0_schema))
-                .start(CRUDProductos.this, logoutCallback);
+                .start(ProductoStockMinimoActivity.this, logoutCallback);
     }
 }
