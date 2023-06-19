@@ -56,7 +56,7 @@ public class CRUDProductos extends AppCompatActivity {
         noexiste=findViewById(R.id.noexiste);
 
         // GONE = INVISIBLE SIN OCUPAR ESPACIO
-        noexiste.setVisibility(View.GONE);
+      //  noexiste.setVisibility(View.GONE);
     }
 
     @Override
@@ -78,9 +78,12 @@ public class CRUDProductos extends AppCompatActivity {
         lv.setAdapter(adaptador);
 
         if (productos.size() == 0) {
-            noexiste.setVisibility(View.VISIBLE);
+    //        noexiste.setVisibility(View.VISIBLE);
+            noexiste.setText(R.string.noexistencia);
         } else {
-            noexiste.setVisibility(View.GONE);
+          //  noexiste.setVisibility(View.GONE);
+            noexiste.setText(R.string.lista_de_productos);
+
         }
       }
 
@@ -92,14 +95,21 @@ public class CRUDProductos extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if(item.getItemId()==R.id.item_logout){
             logout();
         }else if(item.getItemId()==R.id.item_agregar){
             Agregar();
         }
+        else if(item.getItemId()==R.id.item_productosFaltantes) {
+            ListarProductoStockMinimo();
+        }
         return super.onOptionsItemSelected(item);
     }
-
+    public void ListarProductoStockMinimo(){
+        Intent i=new Intent(this, ProductoStockMinimoActivity.class);
+        startActivity(i);
+    }
     //Logout
     public void logout(){
         Callback<Void, AuthenticationException> logoutCallback = new Callback<Void, AuthenticationException>() {

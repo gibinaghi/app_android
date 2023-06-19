@@ -63,7 +63,25 @@ public class ProductoDataSource {
         cursor.close();
         return productos;
     }
-
+    public List<Producto> obtenerProductosStockMinimo(){
+        List<Producto> productos=new ArrayList<Producto>();
+        Cursor cursor=database.query(SqlHelper.TABLAPRODUCTOS,ColumnasSelectObtenerTodos,SqlHelper.TP_STOCKMINIMO+">"+SqlHelper.TP_STOCK,null,null,null,SqlHelper.TP_NOMBRE);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            Producto p =new Producto();
+            p.setId(cursor.getInt(0));
+            p.setNombre(cursor.getString(1));
+            p.setDescripcion(cursor.getString(2));
+            p.setTalle(cursor.getString(3));
+            p.setPrecio(cursor.getDouble(4));
+            p.setStock(cursor.getInt(5));
+            p.setStockMinimo(cursor.getInt(6));
+            productos.add(p);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return productos;
+    }
 
 
     public void modificacion(Producto pProducto){

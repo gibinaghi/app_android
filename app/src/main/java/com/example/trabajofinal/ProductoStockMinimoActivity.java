@@ -2,6 +2,7 @@ package com.example.trabajofinal;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -28,7 +29,7 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ListView lv;
 
-    MyAdaptadorProductos adaptador;
+    MyAdaptadorProductoMinimo adaptador;
 
     TextView noexiste;
 
@@ -51,7 +52,9 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
         noexiste=findViewById(R.id.noexiste);
 
         // GONE = INVISIBLE SIN OCUPAR ESPACIO
-        noexiste.setVisibility(View.GONE);
+       // noexiste.setVisibility(View.GONE);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -66,18 +69,22 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
     }
 
     public void Listar() {
-        List<Producto> productos = productoDataSource.obtenerTodos();
+        List<Producto> productos = productoDataSource.obtenerProductosStockMinimo();
 
-        adaptador = new MyAdaptadorProductos(this, productos);
+        adaptador = new MyAdaptadorProductoMinimo(this, productos);
         adaptador.setNoexiste(noexiste);
         lv.setAdapter(adaptador);
 
         if (productos.size() == 0) {
-            noexiste.setVisibility(View.VISIBLE);
+            //        noexiste.setVisibility(View.VISIBLE);
+            noexiste.setText(R.string.noexistencia);
         } else {
-            noexiste.setVisibility(View.GONE);
+            //  noexiste.setVisibility(View.GONE);
+            noexiste.setText(R.string.lista_de_productos_faltantes);
+
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,7 +100,14 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
         }else if(item.getItemId()==R.id.item_agregar){
             Agregar();
         }
+        else if(item.getItemId()==R.id.item_productosFaltantes) {
+          ListarProductoStockMinimo();
+        }
         return super.onOptionsItemSelected(item);
+    }
+    public void ListarProductoStockMinimo(){
+        Intent i=new Intent(this, ProductoStockMinimoActivity.class);
+        startActivity(i);
     }
 
     //Logout
@@ -116,4 +130,6 @@ public class ProductoStockMinimoActivity extends AppCompatActivity {
                 .withScheme(getString(R.string.com_auth0_schema))
                 .start(ProductoStockMinimoActivity.this, logoutCallback);
     }
+
+
 }

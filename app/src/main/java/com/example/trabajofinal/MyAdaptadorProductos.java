@@ -86,10 +86,11 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
      private void Borrar (Producto producto){
         this.remove(producto);
         if(this.getCount() == 0){
-             noexiste.setVisibility(View.VISIBLE);
+            noexiste.setText(R.string.noexistencia);
         } else {
-             noexiste.setVisibility(View.GONE);
+            noexiste.setText(R.string.lista_de_productos);
         }
+
      }
 
     public void Modificar(Producto p, View v) {
