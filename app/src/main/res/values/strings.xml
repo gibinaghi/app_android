@@ -19,4 +19,7 @@
     <string name="agregar_productos">Agregar Productos</string>
     <string name="modificar_productos">Modificar Productos</string>
     <string name="eliminar_productos">Eliminar Productos</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="modificar">Modificar</string>
+    <string name="noexistencia">No existen Productos a mostrar</string>
 </resources>

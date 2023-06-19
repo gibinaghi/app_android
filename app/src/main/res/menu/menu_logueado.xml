@@ -7,10 +7,5 @@
     <item android:id="@+id/item_agregar"
         android:title="@string/agregar_productos"
         app:showAsAction="never"/>
-    <item android:id="@+id/item_modificar"
-        android:title="@string/modificar_productos"
-        app:showAsAction="never"/>
-    <item android:id="@+id/item_eliminar"
-        android:title="@string/eliminar_productos"
-        app:showAsAction="never"/>
+
 </menu>

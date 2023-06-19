@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.auth0.android.Auth0;
@@ -33,17 +34,16 @@ public class CRUDProductos extends AppCompatActivity {
     private ListView lv;
 
     MyAdaptadorProductos adaptador;
+
+    TextView noexiste;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crudproductos);
-
         lv=findViewById(R.id.listView);
-
-
         //ToolBar
         toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.Titulo);
 
@@ -51,7 +51,9 @@ public class CRUDProductos extends AppCompatActivity {
 
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
-
+        noexiste=findViewById(R.id.noexiste);
+        // GONE = INVISIBLE SIN OCUPAR ESPACIO
+        noexiste.setVisibility(View.GONE);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,14 +79,20 @@ public class CRUDProductos extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void Listar(){
-        List<Producto> productos=productoDataSource.obtenerTodos();
+    public void Listar() {
+        List<Producto> productos = productoDataSource.obtenerTodos();
         //ArrayAdapter<Producto> adapter=new ArrayAdapter<Producto>(this,android.R.layout.simple_list_item_1,productos);
         //setListAdapter(adapter);
-        adaptador=new MyAdaptadorProductos(this,productos);
+        adaptador = new MyAdaptadorProductos(this, productos);
+        adaptador.setNoexiste(noexiste);
         lv.setAdapter(adaptador);
-    }
-
+        if (productos.size() == 0) {
+               noexiste.setVisibility(View.VISIBLE);
+             }
+        else {
+            noexiste.setVisibility(View.GONE);
+        }
+      }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

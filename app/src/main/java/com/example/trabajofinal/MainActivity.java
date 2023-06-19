@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
+import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         controlador.setMediaPlayer(videoView);
 
         videoView.setMediaController(controlador);
+
+
     }
 
     //Crea el menu
@@ -144,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         releasePlayer();
     }
+
+
 
     @Override protected void onPause() {
         super.onPause();
