@@ -10,8 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 import com.auth0.android.Auth0;
 import com.auth0.android.authentication.AuthenticationException;
@@ -25,8 +27,8 @@ public class ProductoAltaModificacion extends AppCompatActivity {
     EditText txtPrecio, txtStock, txtStockMinimo;
     private Auth0 account;
     private Toolbar toolbar;
-
-
+    Button btnBoton;
+    Producto prod;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,9 @@ public class ProductoAltaModificacion extends AppCompatActivity {
         txtPrecio=findViewById(R.id.txtPrecio);
         txtStock=findViewById(R.id.txtStock);
         txtStockMinimo=findViewById(R.id.txtStockMinimo);
+
+        btnBoton=findViewById(R.id.btnAgregar);
+        btnBoton.setText("Agregar");
 
         productoDataSource=new ProductoDataSource(this);
         productoDataSource.open();
@@ -54,9 +59,32 @@ public class ProductoAltaModificacion extends AppCompatActivity {
         //Flecha volver atrás
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        Intent intent=getIntent();
+
+        Bundle b=intent.getExtras();
+        if(b!=null){
+            prod=new Producto();
+            prod.setId(intent.getExtras().getInt("id"));
+            prod.setNombre(intent.getExtras().getString("nombre"));
+            prod.setDescripcion(intent.getExtras().getString("descripcion"));
+            prod.setTalle(intent.getExtras().getString("talle"));
+            prod.setPrecio(intent.getExtras().getDouble("precio"));
+            prod.setStock(intent.getExtras().getInt("stock"));
+            prod.setStockMinimo(intent.getExtras().getInt("stockMinimo"));
+
+            btnBoton.setText("Modificar");
+
+            txtNombre.setText(prod.getNombre());
+            txtDescripcion.setText(prod.getDescripcion());
+            txtTalle.setText(prod.getTalle());
+            txtPrecio.setText(prod.getPrecio()+"");
+            txtStockMinimo.setText(prod.getStockMinimo()+"");
+            txtStock.setText(prod.getStock()+"");
+        }
     }
 
-    public void Agregar(View v){
+    public void AgregarModificar(View v){
         Producto prodNuevo=new Producto();
 
         if(validation()) {
@@ -67,17 +95,20 @@ public class ProductoAltaModificacion extends AppCompatActivity {
             prodNuevo.setStock(Integer.parseInt(txtStock.getText().toString()));
             prodNuevo.setStockMinimo(Integer.parseInt(txtStockMinimo.getText().toString()));
 
-            productoDataSource.agregar(prodNuevo);
+            if(btnBoton.getText().equals("Agregar")){
+                productoDataSource.agregar(prodNuevo);
+                Toast.makeText(this, "El producto " + prodNuevo.getNombre() + " se ha agregado exitosamente", Toast.LENGTH_LONG).show();
+            }else if(btnBoton.getText().equals("Modificar")) {
+                prodNuevo.setId(prod.getId());
+                productoDataSource.modificacion(prodNuevo);
+                Toast.makeText(this, "El producto se ha modificado exitosamente", Toast.LENGTH_LONG).show();
+            }
 
             Intent i = new Intent(this, CRUDProductos.class);
             startActivity(i);
         }
     }
 
-    public void Modificar(View v){
-        Toast.makeText(this, "aca llego", Toast.LENGTH_LONG).show();
-        //aca obtener datos del producto
-    }
 
     //Logout
     public void logout(){

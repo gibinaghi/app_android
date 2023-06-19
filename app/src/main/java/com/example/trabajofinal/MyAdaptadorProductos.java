@@ -2,6 +2,7 @@ package com.example.trabajofinal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
         botonModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Modificar(p);
+                Modificar(p,v);
             }
         });
 
@@ -91,8 +92,19 @@ public class MyAdaptadorProductos extends ArrayAdapter<Producto> {
         }
      }
 
-    public void Modificar(Producto producto) {
-        Intent intent = new Intent(getContext(), ProductoAltaModificacion.class);
-        getContext().startActivity(intent);
+    public void Modificar(Producto p, View v) {
+        Intent i=new Intent(getContext(),ProductoAltaModificacion.class);
+
+        Bundle parametros=new Bundle();
+        parametros.putInt("id", p.getId());
+        parametros.putString("nombre", p.getNombre());
+        parametros.putString("descripcion",p.getDescripcion());
+        parametros.putString("talle",p.getTalle());
+        parametros.putDouble("precio",p.getPrecio());
+        parametros.putInt("stockMinimo",p.getStockMinimo());
+        parametros.putInt("stock",p.getStock());
+        i.putExtras(parametros);
+
+        getContext().startActivity(i);
     }
 }

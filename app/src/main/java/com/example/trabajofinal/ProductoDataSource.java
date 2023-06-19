@@ -28,7 +28,7 @@ public class ProductoDataSource {
         database.close();
     }
 
-    public Producto agregar(Producto pProducto){
+    public void agregar(Producto pProducto){
         ContentValues contentValues=new ContentValues();
         contentValues.put(SqlHelper.TP_NOMBRE, pProducto.getNombre());
         contentValues.put(SqlHelper.TP_DESCRIPCION, pProducto.getDescripcion());
@@ -39,16 +39,6 @@ public class ProductoDataSource {
 
         Long Id=database.insert(SqlHelper.TABLAPRODUCTOS,null,contentValues);
 
-        Cursor cursor=database.query(SqlHelper.TABLAPRODUCTOS,ColumnasSelect,SqlHelper.TP_ID+"="+Id,null,null,null,null);
-
-        cursor.moveToFirst();
-
-        Producto p =new Producto();
-        p.setId(cursor.getInt(0));
-        p.setNombre(cursor.getString(1));
-        p.setStock(cursor.getInt(2));
-        cursor.close();
-        return p;
     }
     public void borrar(Producto p){
         long id=p.getId();
@@ -74,22 +64,9 @@ public class ProductoDataSource {
         return productos;
     }
 
-    public Producto obtenerUno(Producto p){
-        Cursor cursor=database.query(SqlHelper.TABLAPRODUCTOS,ColumnasSelectObtenerTodos,SqlHelper.TP_ID+"=" + p.getId(),null,null,null,null);
-        cursor.moveToFirst();
-
-        p.setNombre(cursor.getString(1));
-        p.setDescripcion(cursor.getString(2));
-        p.setTalle(cursor.getString(3));
-        p.setPrecio(cursor.getDouble(4));
-        p.setStock(cursor.getInt(5));
-        p.setStockMinimo(cursor.getInt(6));
-        cursor.close();
-        return p;
-    }
 
 
-    public Producto modificacion(Producto pProducto){
+    public void modificacion(Producto pProducto){
         ContentValues contentValues=new ContentValues();
         contentValues.put(SqlHelper.TP_NOMBRE, pProducto.getNombre());
         contentValues.put(SqlHelper.TP_DESCRIPCION, pProducto.getDescripcion());
@@ -100,19 +77,5 @@ public class ProductoDataSource {
 
         int Id=database.update(SqlHelper.TABLAPRODUCTOS,contentValues,SqlHelper.TP_ID+"="+pProducto.getId(),null);
 
-        Cursor cursor=database.query(SqlHelper.TABLAPRODUCTOS,ColumnasSelectObtenerTodos,SqlHelper.TP_ID+"="+Id,null,null,null,null);
-
-        cursor.moveToFirst();
-
-        Producto p =new Producto();
-        p.setId(cursor.getInt(0));
-        p.setNombre(cursor.getString(1));
-        p.setDescripcion(cursor.getString(2));
-        p.setTalle(cursor.getString(3));
-        p.setPrecio(cursor.getDouble(4));
-        p.setStock(cursor.getInt(5));
-        p.setStockMinimo(cursor.getInt(6));
-        cursor.close();
-        return p;
     }
 }
